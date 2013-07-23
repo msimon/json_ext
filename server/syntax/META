@@ -1,0 +1,13 @@
+# OASIS_START
+# DO NOT EDIT (digest: fa90c17b0186a606ceb7aea758e8c363)
+package "syntax" (
+ version = "0.1"
+ description =
+ "Syntax extension to translate ocaml type to json, and vice versa"
+ requires = "camlp4"
+ archive(syntax, preprocessor) = "json_extserver.syntax.cma"
+ archive(syntax, toploop) = "json_extserver.syntax.cma"
+ exists_if = "json_extserver.syntax.cma"
+)
+# OASIS_STOP
+

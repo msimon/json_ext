@@ -1,0 +1,5 @@
+(* OASIS_START *)
+(* DO NOT EDIT (digest: 7d2e75c988f25dd59d8fc4649bb44be8) *)
+Authors of Json ext
+Marc Simon <marc.simon42@gmail.com>
+(* OASIS_STOP *)

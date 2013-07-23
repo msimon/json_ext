@@ -1,0 +1,36 @@
+OASISFormat: 0.3
+Name:        Json ext
+Version:     0.1
+Synopsis:    Syntax extension that translate ocaml type to json, and vice versa
+Authors:     Marc Simon <marc.simon42@gmail.com>
+License:     GPL-3
+Plugins:     META (0.3), StdFiles (0.3), DevFiles (0.3)
+
+Library "json_ext.server"
+  Path:       server/src
+  BuildTools: ocamlbuild
+  Modules:    Json_ext
+  BuildDepends: yojson
+
+Library "json_ext.server.syntax"
+  Path:       server/syntax
+  BuildTools: ocamlbuild
+  Modules:    Pa_json
+  BuildDepends : camlp4.quotations.r,camlp4.metagenerator,camlp4.extend,deriving-ocsigen,deriving-ocsigen.syntax
+  CompiledObject:     byte
+  XMETAType:          syntax
+  XMETARequires:      camlp4
+
+Library "json_ext.client"
+  Path:       client/src
+  BuildTools: ocamlbuild
+  Modules:    Json_ext_dummy
+
+Library "json_ext.client.syntax"
+  Path:       client/syntax
+  BuildTools: ocamlbuild
+  Modules:    Pa_json_dummy
+  BuildDepends : camlp4.quotations.r,camlp4.metagenerator,camlp4.extend,deriving-ocsigen,deriving-ocsigen.syntax
+  CompiledObject:     byte
+  XMETAType:          syntax
+  XMETARequires:      camlp4

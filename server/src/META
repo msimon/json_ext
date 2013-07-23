@@ -1,0 +1,43 @@
+# OASIS_START
+# DO NOT EDIT (digest: c69b6d159e4bac37596d31266b9fda74)
+package "server" (
+ version = "0.1"
+ description =
+ "Syntax extension that translate ocaml type to json, and vice versa"
+ requires = "yojson"
+ archive(byte) = "json_ext.server.cma"
+ archive(byte, plugin) = "json_ext.server.cma"
+ archive(native) = "json_ext.server.cmxa"
+ archive(native, plugin) = "json_ext.server.cmxs"
+ exists_if = "json_ext.server.cma"
+ package "syntax" (
+  version = "0.1"
+  description =
+  "Syntax extension that translate ocaml type to json, and vice versa"
+  requires = "camlp4"
+  archive(syntax, preprocessor) = "json_ext.server.syntax.cma"
+  archive(syntax, toploop) = "json_ext.server.syntax.cma"
+  exists_if = "json_ext.server.syntax.cma"
+ )
+)
+package "client" (
+ version = "0.1"
+ description =
+ "Syntax extension that translate ocaml type to json, and vice versa"
+ archive(byte) = "json_ext.client.cma"
+ archive(byte, plugin) = "json_ext.client.cma"
+ archive(native) = "json_ext.client.cmxa"
+ archive(native, plugin) = "json_ext.client.cmxs"
+ exists_if = "json_ext.client.cma"
+ package "syntax" (
+  version = "0.1"
+  description =
+  "Syntax extension that translate ocaml type to json, and vice versa"
+  requires = "camlp4"
+  archive(syntax, preprocessor) = "json_ext.client.syntax.cma"
+  archive(syntax, toploop) = "json_ext.client.syntax.cma"
+  exists_if = "json_ext.client.syntax.cma"
+ )
+)
+# OASIS_STOP
+

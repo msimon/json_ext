@@ -1,0 +1,23 @@
+# OASIS_START
+# DO NOT EDIT (digest: 82f9ac83c687f26e16e27ec99a7419a4)
+package "client" (
+ version = "0.1"
+ description =
+ "Syntax extension to translate ocaml type to json, and vice versa"
+ archive(byte) = "dom_type.client.cma"
+ archive(byte, plugin) = "dom_type.client.cma"
+ archive(native) = "dom_type.client.cmxa"
+ archive(native, plugin) = "dom_type.client.cmxs"
+ exists_if = "dom_type.client.cma"
+ package "syntax" (
+  version = "0.1"
+  description =
+  "Syntax extension to translate ocaml type to json, and vice versa"
+  requires = "camlp4"
+  archive(syntax, preprocessor) = "dom_type.client.syntax.cma"
+  archive(syntax, toploop) = "dom_type.client.syntax.cma"
+  exists_if = "dom_type.client.syntax.cma"
+ )
+)
+# OASIS_STOP
+
