@@ -1,4 +1,5 @@
 exception Error_json
+exception Incorect_type of string
 
 module type Json_ext = sig
   type a
@@ -71,6 +72,7 @@ module Json_ext_float = Default(struct
     let from_json = function
       | `Float f -> f
       | `String f -> float_of_string f
+      | `Int f -> float_of_int f
       | _ -> raise Error_json
 
     let to_json f =

@@ -73,8 +73,12 @@ module Builder(Loc : Defs.Loc) = struct
             fun (name,ty,_) ->
               let expr =
                 <:expr<
-                  let v = Json_ext.assoc $`str:name$ json_list in
-                  $self#call_poly_expr ctxt ty "from_json"$ v
+                  try
+                    let v = Json_ext.assoc $`str:name$ json_list in
+                    $self#call_poly_expr ctxt ty "from_json"$ v
+                  with [ Json_ext.Error_json ->
+                    raise (Json_ext.Incorect_type $`str:name$)
+                  ]
                 >>
               in
               name,expr
