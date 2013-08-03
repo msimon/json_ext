@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: c69b6d159e4bac37596d31266b9fda74)
+# DO NOT EDIT (digest: 87b4badc179ea0b2477d2f869afcb00f)
 package "server" (
  version = "0.1"
  description =
@@ -24,6 +24,7 @@ package "client" (
  version = "0.1"
  description =
  "Syntax extension that translate ocaml type to json, and vice versa"
+ requires = "js_of_ocaml js_of_ocaml.syntax"
  archive(byte) = "json_ext.client.cma"
  archive(byte, plugin) = "json_ext.client.cma"
  archive(native) = "json_ext.client.cmxa"

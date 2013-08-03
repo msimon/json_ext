@@ -10,12 +10,24 @@ end
 
 module Description : Defs.ClassDescription = struct
   let classname = "Json_ext"
-  let runtimename = "Json_ext"
+  let runtimename = "Json_ext_dummy"
   let default_module = None
   let alpha = None
   let allow_private = false
   let predefs = [
+    ["int"], ["Json_ext_dummy";"int"];
+    ["int32"], ["Json_ext_dummy";"int32"];
+    ["Int32";"t"], ["Json_ext_dummy";"int32"];
+    ["int64"], ["Json_ext_dummy";"int64"];
+    ["Int64";"t"], ["Json_ext_dummy";"int64"];
+    ["bool"], ["Json_ext_dummy";"bool"];
+    ["float"], ["Json_ext_dummy";"float"];
+    ["string"], ["Json_ext_dummy";"string"];
+    ["list"], ["Json_ext_dummy";"list"];
+    ["array"],["Json_ext_dummy";"array"];
+    ["option"], ["Json_ext_dummy";"option"];
   ]
+
 
   let depends = []
 end

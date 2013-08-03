@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: 92ba475edc4d4495f4c3d5b1dd17fd77)
+# DO NOT EDIT (digest: 5abf850f5871538465b323612d731da5)
 # Ignore VCS directories, you can use the same kind of rule outside 
 # OASIS_START/STOP if you want to exclude directories that contains 
 # useless stuff for the build process
@@ -25,6 +25,8 @@
 <server/syntax/*.ml{,i}>: pkg_deriving-ocsigen.syntax
 # Library json_ext.client
 "client/src/json_ext.client.cmxs": use_json_ext.client
+<client/src/*.ml{,i}>: pkg_js_of_ocaml
+<client/src/*.ml{,i}>: pkg_js_of_ocaml.syntax
 # Library json_ext.client.syntax
 "client/syntax/json_ext.client.syntax.cmxs": use_json_ext.client.syntax
 <client/syntax/*.ml{,i}>: pkg_camlp4.quotations.r

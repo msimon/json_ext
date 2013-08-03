@@ -25,6 +25,7 @@ Library "json_ext.client"
   Path:       client/src
   BuildTools: ocamlbuild
   Modules:    Json_ext_dummy
+  BuildDepends: js_of_ocaml,js_of_ocaml.syntax
 
 Library "json_ext.client.syntax"
   Path:       client/syntax

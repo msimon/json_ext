@@ -301,35 +301,62 @@ module Builder(Loc : Defs.Loc) = struct
     let modules =
       List.map (
         fun t ->
-          let (name,_,_,_,_) = t in
-          <:str_item<
-            module $uid:("Json_utils_" ^ name)$ =
-            struct
-              value of_file file_name =
-                let json = Json_ext.from_file file_name in
-                $uid:("Json_ext_" ^ name)$.from_json json;
+          let (name,params,_,_,_) = t in
 
-              value to_file obj file_name =
-                let json = $uid:("Json_ext_" ^ name)$.to_json obj in
-                Json_ext.to_file json file_name;
+          let functor_params =
+            List.fold_left (
+              fun m (name, _) ->
+                <:module_expr< $m$ ($uid:"M" ^ name$) >>
+            ) (<:module_expr< $uid:("Json_ext_" ^ name) $>>) params
+          in
+
+          let body =
+            <:module_expr<
+              struct
+                value of_file file_name =
+                  let module $uid:"Json_ext_" ^ name$ = $functor_params$ in
+                  let json = Json_ext.from_file file_name in
+                  $uid:("Json_ext_" ^ name)$.from_json json;
+
+                value to_file obj file_name =
+                  let module $uid:"Json_ext_" ^ name$ = $functor_params$ in
+                  let json = $uid:("Json_ext_" ^ name)$.to_json obj in
+                  Json_ext.to_file json file_name;
 
 
-              value list_of_file file_name =
-                let json = Json_ext.from_file file_name in
+                value list_of_file file_name =
+                  let module $uid:"Json_ext_" ^ name$ = $functor_params$ in
+                  let json = Json_ext.from_file file_name in
                   List.map (
                     fun json ->
                       $uid:("Json_ext_" ^ name)$.from_json json
                   ) (Json_ext.fetch_list json);
 
-              value list_to_file obj_list file_name =
-                let json_list =
-                  List.map (
-                    fun obj ->
-                     $uid:("Json_ext_" ^ name)$.to_json obj
-                  ) obj_list
-                in
-                Json_ext.to_file (Json_ext.to_list json_list) file_name;
-            end
+                value list_to_file obj_list file_name =
+                  let module $uid:"Json_ext_" ^ name$ = $functor_params$ in
+                  let json_list =
+                    List.map (
+                      fun obj ->
+                        $uid:("Json_ext_" ^ name)$.to_json obj
+                     ) obj_list
+                  in
+                  Json_ext.to_file (Json_ext.to_list json_list) file_name;
+              end
+            >>
+          in
+
+          let body =
+            List.fold_right (
+              fun (name,_) body ->
+                <:module_expr<
+                  functor ($uid:("M" ^ name)$ : $uid:"Json_ext"$.$uid:"Json_ext"$)
+                  -> $body$
+                >>
+            ) params body
+          in
+
+          <:str_item<
+            module $uid:("Json_utils_" ^ name)$ = $body$
           >>
       ) decls
     in
@@ -338,7 +365,6 @@ module Builder(Loc : Defs.Loc) = struct
       $i$;
       $list:modules$
     >>
-
 
   let generate_sigs = Generator.generate_sigs generator
 

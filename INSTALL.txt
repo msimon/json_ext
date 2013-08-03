@@ -1,5 +1,5 @@
 (* OASIS_START *)
-(* DO NOT EDIT (digest: 82ea05133151072ae06a7bdd77492615) *)
+(* DO NOT EDIT (digest: 9aaa38b1055cc9c942b3e060cf376aac) *)
 This is the INSTALL file for the Json ext distribution.
 
 This package uses OASIS to generate its build system. See section OASIS for
@@ -14,6 +14,7 @@ In order to compile this package, you will need:
 * yojson for library json_ext.server
 * deriving-ocsigen for library json_ext.client.syntax,
   library json_ext.server.syntax
+* js_of_ocaml for library json_ext.client
 
 Installing
 ==========
