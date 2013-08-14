@@ -1,4 +1,4 @@
-exception Error_json
+exception Error_json of string
 exception Incorect_type of string
 
 module type Json_ext = sig
@@ -16,7 +16,7 @@ module Json_ext_int = Default(struct
     let from_json = function
       | `Int i -> i
       | `String i -> int_of_string i
-      | _ -> raise Error_json
+      | _ -> raise (Error_json "not a int")
 
     let to_json i =
       `Int i
@@ -29,7 +29,7 @@ module Json_ext_int32 = Default(struct
     let from_json = function
       | `Int i -> Int32.of_int i
       | `String i -> Int32.of_string i
-      | _ -> raise Error_json
+      | _ -> raise (Error_json "not a Int32.t")
 
     let to_json i =
       `Int (Int32.to_int i)
@@ -42,7 +42,7 @@ module Json_ext_int64 = Default(struct
     let from_json = function
       | `Int i -> Int64.of_int i
       | `String i -> Int64.of_string i
-      | _ -> raise Error_json
+      | _ -> raise (Error_json "not a Int64.t")
 
     let to_json i =
       `Int (Int64.to_int i)
@@ -60,7 +60,7 @@ module Json_ext_bool = Default(struct
           if s = "false" then false
           else true
         end
-      | _ -> raise Error_json
+      | _ -> raise (Error_json "not a bool")
 
     let to_json b =
       `Bool b
@@ -73,7 +73,7 @@ module Json_ext_float = Default(struct
       | `Float f -> f
       | `String f -> float_of_string f
       | `Int f -> float_of_int f
-      | _ -> raise Error_json
+      | _ -> raise (Error_json "not a float")
 
     let to_json f =
       `Float f
@@ -84,7 +84,7 @@ module Json_ext_string = Default(struct
     type a = string
     let from_json = function
       | `String s -> s
-      | _ -> raise Error_json
+      | _ -> raise (Error_json "not a string")
 
     let to_json i =
       `String i
@@ -98,7 +98,7 @@ module Json_ext_list (A : Json_ext) = Default(struct
           fun json ->
             A.from_json json
         ) l
-      | _ -> raise Error_json
+      | _ -> raise (Error_json "not a list")
 
     let to_json l =
       `List (List.map (fun e -> A.to_json e) l)
@@ -118,7 +118,7 @@ module Json_ext_array (A : Json_ext) = Default(struct
 
         Array.of_list l
 
-      | _ -> raise Error_json
+      | _ -> raise (Error_json "not a Array")
 
     let to_json a =
       let l = Array.to_list a in
@@ -150,12 +150,12 @@ let assoc label json_list =
 let fetch_assoc_value =
   function
     | `Assoc json_list -> json_list
-    | _ -> raise Error_json
+    | _ -> raise (Error_json "not a Assoc")
 
 let fetch_list =
   function
     | `List json_list -> json_list
-    | _ -> raise Error_json
+    | _ -> raise (Error_json "not a list")
 
 let to_list json =
   `List json
@@ -163,13 +163,13 @@ let to_list json =
 let to_json json_list =
   `Assoc json_list
 
-let from_string json =
-  try Yojson.Safe.from_string json
-  with _ -> raise Error_json
+let from_string s =
+  try Yojson.Safe.from_string s
+  with _ -> raise (Error_json (Printf.sprintf "Syntax Error in json : %s" s))
 
-let to_string s =
-  try Yojson.Safe.to_string s
-  with _ -> raise Error_json
+let to_string json =
+  try Yojson.Safe.to_string json
+  with _ -> raise (Error_json "Yojson.Safe.to_string: fatal error")
 
 
 let from_file file_name =
