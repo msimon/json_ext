@@ -16,8 +16,7 @@ Library "json_ext.server.syntax"
   Path:       server/syntax
   BuildTools: ocamlbuild
   Modules:    Pa_json
-  BuildDepends : camlp4.quotations.r,camlp4.metagenerator,camlp4.extend,deriving-ocsigen,deriving-ocsigen.syntax
-  CompiledObject:     byte
+  BuildDepends : camlp4.quotations.r,camlp4.metagenerator,camlp4.extend,deriving,deriving.syntax
   XMETAType:          syntax
   XMETARequires:      camlp4
 
@@ -25,13 +24,14 @@ Library "json_ext.client"
   Path:       client/src
   BuildTools: ocamlbuild
   Modules:    Json_ext_dummy
+  CompiledObject:     byte
   BuildDepends: js_of_ocaml,js_of_ocaml.syntax
 
 Library "json_ext.client.syntax"
   Path:       client/syntax
   BuildTools: ocamlbuild
   Modules:    Pa_json_dummy
-  BuildDepends : camlp4.quotations.r,camlp4.metagenerator,camlp4.extend,deriving-ocsigen,deriving-ocsigen.syntax
+  BuildDepends : camlp4.quotations.r,camlp4.metagenerator,camlp4.extend,deriving,deriving.syntax
   CompiledObject:     byte
   XMETAType:          syntax
   XMETARequires:      camlp4

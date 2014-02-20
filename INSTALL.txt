@@ -1,9 +1,9 @@
 (* OASIS_START *)
-(* DO NOT EDIT (digest: 9aaa38b1055cc9c942b3e060cf376aac) *)
+(* DO NOT EDIT (digest: c34cf63c07fc0c2a8c71557ff4076bda) *)
 This is the INSTALL file for the Json ext distribution.
 
 This package uses OASIS to generate its build system. See section OASIS for
-full information. 
+full information.
 
 Dependencies
 ============
@@ -12,8 +12,7 @@ In order to compile this package, you will need:
 * ocaml
 * findlib
 * yojson for library json_ext.server
-* deriving-ocsigen for library json_ext.client.syntax,
-  library json_ext.server.syntax
+* deriving for library json_ext.client.syntax, library json_ext.server.syntax
 * js_of_ocaml for library json_ext.client
 
 Installing
@@ -27,7 +26,7 @@ Installing
 Uninstalling
 ============
 
-1. Go to the root of the package 
+1. Go to the root of the package
 2. Run 'ocaml setup.ml -uninstall'
 
 OASIS

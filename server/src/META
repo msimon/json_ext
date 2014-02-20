@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: 87b4badc179ea0b2477d2f869afcb00f)
+# DO NOT EDIT (digest: a24532010c6895f1a37ad75bb7218921)
 package "server" (
  version = "0.1"
  description =
@@ -17,6 +17,10 @@ package "server" (
   requires = "camlp4"
   archive(syntax, preprocessor) = "json_ext.server.syntax.cma"
   archive(syntax, toploop) = "json_ext.server.syntax.cma"
+  archive(syntax, byte) = "json_ext.server.syntax.cma"
+  archive(syntax, byte, plugin) = "json_ext.server.syntax.cma"
+  archive(syntax, native) = "json_ext.server.syntax.cmxa"
+  archive(syntax, native, plugin) = "json_ext.server.syntax.cmxs"
   exists_if = "json_ext.server.syntax.cma"
  )
 )
@@ -27,8 +31,6 @@ package "client" (
  requires = "js_of_ocaml js_of_ocaml.syntax"
  archive(byte) = "json_ext.client.cma"
  archive(byte, plugin) = "json_ext.client.cma"
- archive(native) = "json_ext.client.cmxa"
- archive(native, plugin) = "json_ext.client.cmxs"
  exists_if = "json_ext.client.cma"
  package "syntax" (
   version = "0.1"
@@ -37,6 +39,8 @@ package "client" (
   requires = "camlp4"
   archive(syntax, preprocessor) = "json_ext.client.syntax.cma"
   archive(syntax, toploop) = "json_ext.client.syntax.cma"
+  archive(syntax, byte) = "json_ext.client.syntax.cma"
+  archive(syntax, byte, plugin) = "json_ext.client.syntax.cma"
   exists_if = "json_ext.client.syntax.cma"
  )
 )

@@ -1,7 +1,7 @@
 # OASIS_START
-# DO NOT EDIT (digest: 5abf850f5871538465b323612d731da5)
-# Ignore VCS directories, you can use the same kind of rule outside 
-# OASIS_START/STOP if you want to exclude directories that contains 
+# DO NOT EDIT (digest: 718aba586b2df0a527fbe9c05b80d56b)
+# Ignore VCS directories, you can use the same kind of rule outside
+# OASIS_START/STOP if you want to exclude directories that contains
 # useless stuff for the build process
 <**/.svn>: -traverse
 <**/.svn>: not_hygienic
@@ -21,8 +21,8 @@
 <server/syntax/*.ml{,i}>: pkg_camlp4.quotations.r
 <server/syntax/*.ml{,i}>: pkg_camlp4.metagenerator
 <server/syntax/*.ml{,i}>: pkg_camlp4.extend
-<server/syntax/*.ml{,i}>: pkg_deriving-ocsigen
-<server/syntax/*.ml{,i}>: pkg_deriving-ocsigen.syntax
+<server/syntax/*.ml{,i}>: pkg_deriving
+<server/syntax/*.ml{,i}>: pkg_deriving.syntax
 # Library json_ext.client
 "client/src/json_ext.client.cmxs": use_json_ext.client
 <client/src/*.ml{,i}>: pkg_js_of_ocaml
@@ -32,7 +32,7 @@
 <client/syntax/*.ml{,i}>: pkg_camlp4.quotations.r
 <client/syntax/*.ml{,i}>: pkg_camlp4.metagenerator
 <client/syntax/*.ml{,i}>: pkg_camlp4.extend
-<client/syntax/*.ml{,i}>: pkg_deriving-ocsigen
-<client/syntax/*.ml{,i}>: pkg_deriving-ocsigen.syntax
+<client/syntax/*.ml{,i}>: pkg_deriving
+<client/syntax/*.ml{,i}>: pkg_deriving.syntax
 # OASIS_STOP
 <server/syntax/*.ml{,i}> or <client/syntax/*.ml{,i}> : syntax_camlp4o

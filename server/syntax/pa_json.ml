@@ -133,7 +133,7 @@ module Builder(Loc : Defs.Loc) = struct
           value from_json json =
             match (Json_ext.fetch_list json) with
              [ $Helpers.patt_list (List.map (fun x -> <:patt<$lid:x$>>) ids)$ -> $Helpers.tuple_expr l$
-                  | _ -> raise Json_ext.Error_json "tuple"
+                  | _ -> raise (Json_ext.Error_json "tuple")
              ]
         >>
       in
@@ -246,7 +246,7 @@ module Builder(Loc : Defs.Loc) = struct
           List.fold_left (
             fun acc t ->
               mc (no_expr acc) (with_expr acc) t
-          ) [ <:match_case< _ -> raise Json_ext.Error_json "variant" >> ] tags
+          ) [ <:match_case< _ -> raise (Json_ext.Error_json "variant") >> ] tags
         in
 
         <:str_item<
