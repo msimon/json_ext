@@ -1,3 +1,16 @@
+open Ocamlbuild_plugin
+open Command
+
+let _ =
+  rule "cmxa -> cmxs"
+    ~dep:("%(name).cmxa")
+    ~prod:("%(name).cmxs")
+    (fun env build ->
+       let tags = tags_of_pathname (env "%(name).cmxs") in
+
+       Cmd (S [A "ocamlfind"; A "ocamlopt"; A "-shared"; A "-linkall"; T tags; A (env "%(name).cmxa"); A "-o"; Px (env "%(name).cmxs") ])
+    )
+
 (* OASIS_START *)
 (* DO NOT EDIT (digest: 8429640618080595d38ee12e591ce8fa) *)
 module OASISGettext = struct
@@ -39,10 +52,10 @@ module OASISExpr = struct
   open OASISGettext
 
 
-  type test = string 
+  type test = string
 
 
-  type flag = string 
+  type flag = string
 
 
   type t =
@@ -52,10 +65,10 @@ module OASISExpr = struct
     | EOr of t * t
     | EFlag of flag
     | ETest of test * string
-    
 
 
-  type 'a choices = (t * 'a) list 
+
+  type 'a choices = (t * 'a) list
 
 
   let eval var_get t =
@@ -394,10 +407,10 @@ module MyOCamlbuildBase = struct
   module OC = Ocamlbuild_pack.Ocaml_compiler
 
 
-  type dir = string 
-  type file = string 
-  type name = string 
-  type tag = string 
+  type dir = string
+  type file = string
+  type name = string
+  type tag = string
 
 
 (* # 62 "src/plugins/ocamlbuild/MyOCamlbuildBase.ml" *)
@@ -412,7 +425,7 @@ module MyOCamlbuildBase = struct
          * directory.
          *)
         includes:  (dir * dir list) list;
-      } 
+      }
 
 
   let env_filename =
